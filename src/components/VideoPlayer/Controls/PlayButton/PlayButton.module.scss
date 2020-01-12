@@ -1,0 +1,17 @@
+.PlayButton {
+    all: unset;
+    box-sizing: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    
+
+    &__Icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        fill: #fff;
+    }
+}

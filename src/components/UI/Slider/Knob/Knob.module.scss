@@ -1,0 +1,14 @@
+@import "../../../../variables";
+
+.Knob {
+    display: inline-block;
+    cursor: pointer;
+    position: absolute;
+    border-radius: 50%;
+    background-color: $color-white;
+    transform-origin: 75% 50%;
+    top: 0;
+    width: 25px;
+    height: 25px;
+    z-index: 10000;
+}

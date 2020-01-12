@@ -1,0 +1,29 @@
+@import "../../../../variables";
+
+.Volume {
+    display: flex;
+    align-items: center;
+    margin-left: 3rem;
+    cursor: pointer;
+    
+    &__Icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        fill: $color-white;
+    }
+
+    &__Range {
+        display: inline-block;
+        height: 2.6rem;
+        width: 12rem;
+        padding: 0 1.25rem;
+        transition: all 0.2s ease-out;
+        overflow: hidden;
+        opacity: 0;
+        margin-left: 1rem;
+    }
+
+    &:hover &__Range {
+        opacity: 1;
+    }
+}

@@ -1,0 +1,27 @@
+@import "../../../variables";
+
+.Slider {    
+    position: relative;
+    height: 26px;
+    padding: 9px 0;
+    width: 100%;
+
+    &__Background,
+    &__BackgroundFull {
+        position: absolute;
+        height: 8px;
+        border-radius: 5px;
+    }
+
+    &__Background {
+        width: 100%;
+        background-color: rgba($color-gray-light, 0.5);
+        z-index: 1000;
+        cursor: pointer;
+    }
+
+    &__BackgroundFull {
+        background-color: $color-white;
+        z-index: 10;
+    }
+}

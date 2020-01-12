@@ -1,0 +1,27 @@
+@import "../../../../variables";
+
+.Progress {
+    z-index: 1000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+
+    &__Background,
+    &__Foreground {
+        position: absolute;
+    }
+
+    &__Background {
+        width: 100%;
+        height: 100%;
+        background-color: $color-gray-light;
+        cursor: pointer;
+    }
+
+    &__Foreground {
+        background-color: red;
+    }
+}
+
