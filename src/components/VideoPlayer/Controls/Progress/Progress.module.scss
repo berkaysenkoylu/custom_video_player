@@ -12,16 +12,17 @@
     &__Foreground {
         position: absolute;
         height: 100%;
+        cursor: pointer;
     }
 
     &__Background {
         width: 100%;
         background-color: $color-gray-light;
-        cursor: pointer;
     }
 
     &__Foreground {
         background-color: red;
+        pointer-events: none;
     }
 }
 

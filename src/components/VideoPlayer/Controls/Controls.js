@@ -19,15 +19,19 @@ const Controls = (props) => {
 
     return (
         <div className={classList.join(' ')}>
-            <Progress />
+            <Progress 
+                progressValue={props.played / props.duration * 100}
+                seeking={props.seeking}
+                seekTo={props.seekTo}
+            />
 
-            <PlayButton playing={props.playing} />
+            <PlayButton playing={props.playing} clicked={props.onPlayed} />
 
-            <Time />
+            <Time duration={props.duration} played={props.played} />
 
-            <Speed />
+            <Speed setPlayback={props.playbackChange} />
 
-            <Volume />
+            <Volume volumeChanged={props.volumeChange} />
         </div>
     )
 }

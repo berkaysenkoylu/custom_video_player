@@ -36,11 +36,12 @@ const Progress = (props) => {
         }
 
         setIsMouseDown(isMouseDown => true);
+        props.seeking(true);
 
         let position = findPosition(event);
 
         setPosX(position);
-    }, []);
+    }, [props]);
 
     const onMouseMoveHandlerCB = useCallback((event) => {
         if(isMouseDown) {
@@ -56,11 +57,13 @@ const Progress = (props) => {
         }
 
         setIsMouseDown(isMouseDown => false);
+        props.seeking(false);
 
         let position = findPosition(event);
+        props.seekTo(position);
 
         setPosX(position);
-    }, [isMouseDown]);
+    }, [isMouseDown, props]);
 
     useEffect(() => {
         document.addEventListener('mousedown', onMouseDownHandlerCB);

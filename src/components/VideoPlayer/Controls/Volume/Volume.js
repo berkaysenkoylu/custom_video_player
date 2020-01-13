@@ -28,6 +28,8 @@ const Volume = (props) => {
         }
         setVolumeValue(value);
         setLastVolume(value);
+
+        props.volumeChanged(value);
     }
 
     const onToggleMuteHandler = () => {
@@ -38,11 +40,13 @@ const Volume = (props) => {
             setValumeIcon('mute2');
 
             // MUTE
+            props.volumeChanged(0);
         }
         else {
             onSliderValueChanged(lastVolume);
 
             // UNMUTE
+            props.volumeChanged(lastVolume);
         }
     }
 
