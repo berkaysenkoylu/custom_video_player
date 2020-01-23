@@ -6,6 +6,7 @@ import Time from './Time/Time';
 import Speed from './Speed/Speed';
 import Volume from './Volume/Volume';
 import Progress from './Progress/Progress';
+import FullScreen from './FullScreen/FullScreen';
 
 const Controls = (props) => {
 
@@ -32,6 +33,8 @@ const Controls = (props) => {
             <Speed setPlayback={props.playbackChange} />
 
             <Volume volumeChanged={props.volumeChange} />
+
+            <FullScreen fullscreen={props.isFullScreen} clicked={props.onScreenSize} />
         </div>
     )
 }

@@ -1,3 +1,4 @@
+@import "../../variables";
 
 .VideoPlayer {
     display: flex;
@@ -9,10 +10,14 @@
         position: relative;
     }
 
-    &__Transcript {
+    &__TranscriptWrapper {
         height: 100%;
         background-color: #ccc;
-        margin-left: 1rem;
-        width: 16rem;
+        padding: 1rem;
+        font-size: $default-font-size;
+        overflow: hidden;
+        overflow-y: scroll;
+        // margin-left: 1rem;
+        // width: 20rem;
     }
 }

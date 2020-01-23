@@ -1,5 +1,19 @@
 <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
+<symbol id="icon-enlarge" viewBox="0 0 32 32">
+<title>enlarge</title>
+<path d="M32 0h-13l5 5-6 6 3 3 6-6 5 5z"></path>
+<path d="M32 32v-13l-5 5-6-6-3 3 6 6-5 5z"></path>
+<path d="M0 32h13l-5-5 6-6-3-3-6 6-5-5z"></path>
+<path d="M0 0v13l5-5 6 6 3-3-6-6 5-5z"></path>
+</symbol>
+<symbol id="icon-shrink" viewBox="0 0 32 32">
+<title>shrink</title>
+<path d="M18 14h13l-5-5 6-6-3-3-6 6-5-5z"></path>
+<path d="M18 18v13l5-5 6 6 3-3-6-6 5-5z"></path>
+<path d="M14 18h-13l5 5-6 6 3 3 6-6 5 5z"></path>
+<path d="M14 14v-13l-5 5-6-6-3 3 6 6-5 5z"></path>
+</symbol>
 <symbol id="icon-play3" viewBox="0 0 32 32">
 <title>play3</title>
 <path d="M6 4l20 12-20 12z"></path>

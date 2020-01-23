@@ -4,7 +4,7 @@ import VideoPlayer from './components/VideoPlayer/VideoPlayer';
 
 function App() {
   return (
-    <div>
+    <div style={{height: '100vh'}}>
 		  <VideoPlayer />
     </div>
   );

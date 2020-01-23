@@ -1,0 +1,17 @@
+.FullScreen {
+    all: unset;
+    box-sizing: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-left: auto;
+    cursor: pointer;
+
+    &__Icon {
+        width: 2rem;
+        height: 2rem;
+        fill: #fff;
+    }
+}
