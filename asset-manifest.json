@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/custom_video_player/static/css/main.975ba8dd.chunk.css",
+    "main.js": "/custom_video_player/static/js/main.2bd0491f.chunk.js",
+    "main.js.map": "/custom_video_player/static/js/main.2bd0491f.chunk.js.map",
+    "runtime-main.js": "/custom_video_player/static/js/runtime-main.06cf03f6.js",
+    "runtime-main.js.map": "/custom_video_player/static/js/runtime-main.06cf03f6.js.map",
+    "static/js/2.aa401b20.chunk.js": "/custom_video_player/static/js/2.aa401b20.chunk.js",
+    "static/js/2.aa401b20.chunk.js.map": "/custom_video_player/static/js/2.aa401b20.chunk.js.map",
+    "index.html": "/custom_video_player/index.html",
+    "precache-manifest.c337c5f15c7c4f067cfcba01bbeb7b36.js": "/custom_video_player/precache-manifest.c337c5f15c7c4f067cfcba01bbeb7b36.js",
+    "service-worker.js": "/custom_video_player/service-worker.js",
+    "static/css/main.975ba8dd.chunk.css.map": "/custom_video_player/static/css/main.975ba8dd.chunk.css.map",
+    "static/js/2.aa401b20.chunk.js.LICENSE": "/custom_video_player/static/js/2.aa401b20.chunk.js.LICENSE",
+    "static/media/sprite.svg": "/custom_video_player/static/media/sprite.dbcf112a.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.06cf03f6.js",
+    "static/js/2.aa401b20.chunk.js",
+    "static/css/main.975ba8dd.chunk.css",
+    "static/js/main.2bd0491f.chunk.js"
+  ]
+}
