@@ -27,8 +27,13 @@ const Transcript = React.memo((props) => {
         />
     });
 
+
+    let style = {
+        transform: `translateY(${props.heightOffset / 2 - 50 || 175}px)`
+    }
+
     return (
-        <ul className={classes.Transcript}>
+        <ul className={classes.Transcript} style={style}>
             {content}
         </ul>
     );

@@ -9,19 +9,20 @@ import Transcript from './Transcript/Transcript';
 
 const VideoPlayer = (props) => {
     const [isPlaying, setIsPlaying] = useState(false);
-    const [controlsVisible, setControlsVisible] = useState(false);
+    // const [controlsVisible, setControlsVisible] = useState(false);
+    const [scrollHeight, setScrollHeight] = useState(null);
     const [volume, setVolume] = useState(1);
     const [playbackRate, setPlaybackRate] = useState(1);
     const [videoDuration, setVideoDuration] = useState(null);
     const [playedSec, setPlayedSec] = useState(0);
     const [fullScreen, setFullScreen] = useState(false);
     const [playerStyle, setPlayerStyle] = useState({
-        playerWidth: "600px",
-        playerHeight: "450px",
-        transcriptWidth: "250px",
-        currTranscriptWidth: "250px",
-        currPlayerWidth: "600px",
-        currPlayerHeight: "450px",
+        playerWidth: 600,
+        playerHeight: 450,
+        transcriptWidth: 250,
+        currTranscriptWidth: 250,
+        currPlayerWidth: 600,
+        currPlayerHeight: 450,
     });
     const [transcriptIndex, setTranscriptIndex] = useState(0);
 
@@ -29,7 +30,7 @@ const VideoPlayer = (props) => {
 
     let playerRef = useRef(null);
     let scrollRect = useRef(null);
-    let timeoutId;
+    // let timeoutId;
 
     const updateSize = useCallback(
         () => {
@@ -48,17 +49,18 @@ const VideoPlayer = (props) => {
 
     useEffect(() => {
         window.addEventListener('resize', updateSize);
+        setScrollHeight(scrollRect.current.clientHeight);
 
         return () => {
             window.removeEventListener('resize', updateSize);
         }
     }, [updateSize])
 
-    useEffect(() => {
-        return () => {
-            clearTimeout(timeoutId);
-        };
-    }, [timeoutId])
+    // useEffect(() => {
+    //     return () => {
+    //         clearTimeout(timeoutId);
+    //     };
+    // }, [timeoutId]);
 
     const onPlayedHandler = (event) => {
         event.preventDefault();
@@ -95,22 +97,20 @@ const VideoPlayer = (props) => {
         let currIndex = getCurrentTranscriptIndex(obj.playedSeconds);
         setTranscriptIndex(currIndex);
 
-        // scrollingTo(currIndex, Object.keys(transcriptJson).length);
-
         setPlayedSec(playedSec => obj.playedSeconds);
     }
 
-    const toggleControlVisibility = (isMouseIn) => {   
-        // console.log(isMouseIn)     
-        if(!isMouseIn) {
-            timeoutId = setTimeout(() => {
-                setControlsVisible(controlsVisible => isMouseIn);
-            }, 3000);
-        }
-        else {
-            setControlsVisible(controlsVisible => isMouseIn);
-        }
-    }
+    // const toggleControlVisibility = (isMouseIn) => {   
+    //     // console.log(isMouseIn)     
+    //     if(!isMouseIn) {
+    //         timeoutId = setTimeout(() => {
+    //             setControlsVisible(controlsVisible => isMouseIn);
+    //         }, 3000);
+    //     }
+    //     else {
+    //         setControlsVisible(controlsVisible => isMouseIn);
+    //     }
+    // }
 
     const onSeekingHandler = (isSeeking) => {
         if(isSeeking) {
@@ -131,7 +131,6 @@ const VideoPlayer = (props) => {
             setIsPlaying(true);
         }
         setTranscriptIndex(index);
-        // scrollingTo(index, Object.keys(transcriptJson).length);
 
         playerRef.current.seekTo(seconds, 'seconds');
     }
@@ -162,6 +161,8 @@ const VideoPlayer = (props) => {
     // }
 
     const scrollToPositionHandler = (pos) => {
+        // TODO: check if isPlaying?
+
         scrollRect.current.scrollTo({ top: pos, behavior: 'smooth' });
     }
 
@@ -171,6 +172,9 @@ const VideoPlayer = (props) => {
         for(let i = 1; i < keyArr.length; i++) {
             if(seconds >= +keyArr[i-1] && seconds < +keyArr[i]) {
                 index = i-1;
+            }
+            else if(seconds >= +keyArr[i]) {
+                index = i;
             }
         }
 
@@ -186,10 +190,11 @@ const VideoPlayer = (props) => {
         return widths;
     }
 
+    // onMouseEnter={() => toggleControlVisibility(true)} onMouseLeave={() => toggleControlVisibility(false)}
     return (
-        <div className={classes.VideoPlayer} style={{height: playerStyle.currPlayerHeight}}>
-            <div className={classes.VideoPlayer__Screen} onMouseEnter={() => toggleControlVisibility(true)} onMouseLeave={() => toggleControlVisibility(false)}>
-                <div className={classes.VideoScreen} style={{ width: playerStyle.currPlayerWidth, height: playerStyle.currPlayerHeight }}>
+        <div className={classes.VideoPlayer} style={{height: `${playerStyle.currPlayerHeight}px`}}>
+            <div className={classes.VideoPlayer__Screen} > 
+                <div className={classes.VideoScreen} style={{ width: `${playerStyle.currPlayerWidth}px`, height: `${playerStyle.currPlayerHeight}px` }}>
                     <ReactPlayer
                         ref={playerRef}
                         url='https://www.youtube.com/watch?v=MYMS1V8GwBk'
@@ -203,12 +208,11 @@ const VideoPlayer = (props) => {
                         playbackRate={playbackRate}
                         playing={isPlaying}
                         width='100%'
-                        height='100%'
+                        height={`${playerStyle.currPlayerHeight - 50}px`}
                     />
                 </div>
-                {/* isPlaying && controlsVisible */}
                 <Controls 
-                    visible={controlsVisible}
+                    // visible={controlsVisible}
                     onPlayed={onPlayedHandler}
                     playing={isPlaying}
                     volumeChange={onVolumeChangeHandler}
@@ -221,8 +225,9 @@ const VideoPlayer = (props) => {
                     onScreenSize={onScreenSizeHandler}
                 />
             </div>
-            <div className={classes.VideoPlayer__TranscriptWrapper} style={{width: playerStyle.currTranscriptWidth }} ref={scrollRect}>
+            <div className={classes.VideoPlayer__TranscriptWrapper} style={{width: `${playerStyle.currTranscriptWidth}px` }} ref={scrollRect}>
                 <Transcript
+                    heightOffset={scrollHeight}
                     transcript={transcriptJson}
                     currentIndex={transcriptIndex}
                     goToSeconds={onGoToSecondsHandler}

@@ -77,7 +77,6 @@ const Progress = (props) => {
         };
     }, [onMouseDownHandlerCB, onMouseMoveHandlerCB, onMouseUpHandlerCB]);
 
-
     let foregroundStyle = {
         left: `${0}%`,
         width: `${posX}%`

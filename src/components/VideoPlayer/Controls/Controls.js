@@ -9,17 +9,8 @@ import Progress from './Progress/Progress';
 import FullScreen from './FullScreen/FullScreen';
 
 const Controls = (props) => {
-
-    let classList = [classes.Controls];
-    if(props.visible) {
-        classList = [classes.Controls, classes.Controls__Revealed];
-    }
-    else {
-        classList = [classes.Controls];
-    }
-
     return (
-        <div className={classList.join(' ')}>
+        <div className={classes.Controls}>
             <Progress 
                 progressValue={props.played / props.duration * 100}
                 seeking={props.seeking}
