@@ -15,7 +15,6 @@ const VideoPlayer = (props) => {
     const [videoDuration, setVideoDuration] = useState(null);
     const [playedSec, setPlayedSec] = useState(0);
     const [fullScreen, setFullScreen] = useState(false);
-
     const [playerStyle, setPlayerStyle] = useState({
         playerWidth: "600px",
         playerHeight: "450px",
@@ -24,6 +23,9 @@ const VideoPlayer = (props) => {
         currPlayerWidth: "600px",
         currPlayerHeight: "450px",
     });
+    const [transcriptIndex, setTranscriptIndex] = useState(0);
+
+    const transcriptJson = require('../../assets/transcripts/transcript1.json');
 
     let playerRef = useRef(null);
     let scrollRect = useRef(null);
@@ -89,6 +91,12 @@ const VideoPlayer = (props) => {
     }
 
     const onGetProgress = (obj) => {
+        // Also get the new transcript index
+        let currIndex = getCurrentTranscriptIndex(obj.playedSeconds);
+        setTranscriptIndex(currIndex);
+
+        // scrollingTo(currIndex, Object.keys(transcriptJson).length);
+
         setPlayedSec(playedSec => obj.playedSeconds);
     }
 
@@ -118,10 +126,12 @@ const VideoPlayer = (props) => {
         playerRef.current.seekTo(val / 100, 'fraction');
     }
 
-    const onGoToSecondsHandler = (seconds) => {
+    const onGoToSecondsHandler = (seconds, index) => {
         if(!isPlaying) {
             setIsPlaying(true);
         }
+        setTranscriptIndex(index);
+        // scrollingTo(index, Object.keys(transcriptJson).length);
 
         playerRef.current.seekTo(seconds, 'seconds');
     }
@@ -147,9 +157,24 @@ const VideoPlayer = (props) => {
         setFullScreen(fullScreen => !fullScreen);
     }
 
-    const onScrollToHandler = (index, length) => {
-        // TODO: MINOR ADJUSTMENTS ?
-        scrollRect.current.scrollTo({ top: scrollRect.current.scrollTopMax / length * index, behavior: 'smooth' });
+    // const scrollingTo = (index, length) => {
+    //     scrollRect.current.scrollTo({ top: scrollRect.current.scrollTopMax / length * index + 5, behavior: 'smooth' });
+    // }
+
+    const scrollToPositionHandler = (pos) => {
+        scrollRect.current.scrollTo({ top: pos, behavior: 'smooth' });
+    }
+
+    const getCurrentTranscriptIndex = (seconds) => {
+        let index = 0;
+        let keyArr = Object.keys(transcriptJson);
+        for(let i = 1; i < keyArr.length; i++) {
+            if(seconds >= +keyArr[i-1] && seconds < +keyArr[i]) {
+                index = i-1;
+            }
+        }
+
+        return index;
     }
 
     const getWidths = () => {
@@ -162,8 +187,6 @@ const VideoPlayer = (props) => {
     }
 
     return (
-        // <ReactPlayer url='https://www.youtube.com/watch?v=ysz5S6PUM-U' playing width={800} height={600} />
-
         <div className={classes.VideoPlayer} style={{height: playerStyle.currPlayerHeight}}>
             <div className={classes.VideoPlayer__Screen} onMouseEnter={() => toggleControlVisibility(true)} onMouseLeave={() => toggleControlVisibility(false)}>
                 <div className={classes.VideoScreen} style={{ width: playerStyle.currPlayerWidth, height: playerStyle.currPlayerHeight }}>
@@ -199,7 +222,12 @@ const VideoPlayer = (props) => {
                 />
             </div>
             <div className={classes.VideoPlayer__TranscriptWrapper} style={{width: playerStyle.currTranscriptWidth }} ref={scrollRect}>
-                <Transcript currentSecond={playedSec} goToSeconds={onGoToSecondsHandler} scrollTo={onScrollToHandler} />
+                <Transcript
+                    transcript={transcriptJson}
+                    currentIndex={transcriptIndex}
+                    goToSeconds={onGoToSecondsHandler}
+                    currentLinePos={scrollToPositionHandler}
+                />
             </div>
         </div>
     )

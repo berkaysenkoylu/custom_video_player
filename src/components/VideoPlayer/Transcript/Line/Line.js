@@ -2,7 +2,7 @@ import React from 'react';
 
 import classes from './Line.module.scss';
 
-const Line = (props) => {
+const Line = React.forwardRef((props, ref) => {
     let classList = [classes.Line];
 
     if(props.isCurrent) {
@@ -10,10 +10,10 @@ const Line = (props) => {
     }
 
     return (
-        <li className={classList.join(' ')} onClick={props.clicked}>
+        <li className={classList.join(' ')} onClick={props.clicked} ref={ref}>
             {props.lineContent}
         </li>
     )
-}
+})
 
 export default Line;
